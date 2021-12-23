@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.fields.related import ForeignKey
 
 # Create your models here.
 class Post(models.Model): 
@@ -17,3 +18,11 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return f"{self.title}: created at {self.created_at}"
+
+class Comment(models.Model):
+    comment = models.TextField()
+    author = models.CharField(max_length=100 , blank=True, null=True)
+    email = models.EmailField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    post = models.ForeignKey('Post', on_delete=models.CASCADE) 
+

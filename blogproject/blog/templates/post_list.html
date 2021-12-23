@@ -8,10 +8,10 @@
         <a href="{% url 'post_details_slug' %">
         {{ p.title }}, posted on {{ post.created_on }}
         </a>
-        {{ p.title }}, 
-        <strong>created {{ p.created_at|timesince }} ago
-
-        </strong>, status is {{p.get_status_display}}</li> 
+        
+        <strong>created {{ p.created_at|timesince }} ago </strong>, status is {{p.get_status_display}}
+        Comments: {{p.comment_set.count}}
+      </li> 
       {% endfor %}
     </ul>
   </body>
