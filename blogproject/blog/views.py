@@ -1,6 +1,8 @@
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 
 from.models import Post
+
+from.forms import PostForm
 
 # Create your views here.
 
@@ -44,3 +46,15 @@ def post_details_slug(request, s):
         'comments':cs,
     }
     return render(request, "post_details.html", c)
+
+def create_post(request):
+    f = PostForm(request.Post or None)
+
+    if f.is_valid():
+        f.save()
+        return redirect
+
+    c = {
+        'form': f,
+    }
+    return render(request, 'create_post.html', c)
