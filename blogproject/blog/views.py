@@ -1,4 +1,5 @@
 from django.shortcuts import get_object_or_404, redirect, render
+from django.utils.text import slugify
 
 from.models import Post
 
@@ -51,8 +52,11 @@ def create_post(request):
     f = PostForm(request.Post or None)
 
     if f.is_valid():
-        f.save()
-        return redirect
+        p = f.save(commit=False)
+        print("TITLE IS: ",p.title)
+        p.slug = slugify(p.title)
+        p.save()
+        return redirect("post_details_slug", s=p.id)
 
     c = {
         'form': f,
